@@ -7,8 +7,28 @@ import br.com.fiap.to.ProdutoTO;
 
 public class ProdutoBO {
 	// private static Logger log = Logger.getLogger(EstoqueBO.class);
+	
+	private static ArrayList<ProdutoTO> lista = new ArrayList<ProdutoTO>();
+	private static ProdutoBO produtoBo;
+	
+	
+	public static ProdutoBO getInstance() {
+		if (produtoBo == null) {
+			produtoBo = new ProdutoBO();
+		}
+		return produtoBo;
+	}
 
+	
+	public ProdutoBO() {
+		lista.add(ProdutoBO.consultarBO(401));
+		lista.add(ProdutoBO.consultarBO(402));
+		lista.add(ProdutoBO.consultarBO(403));
+		
+	}
+	
 	public static ProdutoTO consultarBO(int codProd) {
+	
 
 		if (codProd == 401) {
 			// log.debug(codProd + " - " + " Camisa Branca");
@@ -30,12 +50,18 @@ public class ProdutoBO {
 	}
 
 	public List<ProdutoTO> listar() {
-		ArrayList<ProdutoTO> lista = new ArrayList<ProdutoTO>();
-		lista.add(ProdutoBO.consultarBO(401));
-		lista.add(ProdutoBO.consultarBO(402));
-		lista.add(ProdutoBO.consultarBO(403));
-		return lista;
+		return lista ;
 	}
+	
+	
+	public void cadastar(ProdutoTO produto) {
+		lista.add(produto);
+	}
+	
+	public ProdutoTO listar(int codigo) {
+		return consultarBO(codigo);
+	}
+	
 	
 	
 
